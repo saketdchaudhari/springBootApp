@@ -1,5 +1,8 @@
 package springbootstarter.web;
 
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,7 @@ public class GreetingController {
     private IGreetingService service;
 	
 	@RequestMapping(method = RequestMethod.GET)
+	@Produces(MediaType.TEXT_PLAIN)
     public ResponseEntity<String> greetUser() {
     	logger.info("Received gretting request.");
     	return new ResponseEntity<String>(service.greetUser(), HttpStatus.OK);
