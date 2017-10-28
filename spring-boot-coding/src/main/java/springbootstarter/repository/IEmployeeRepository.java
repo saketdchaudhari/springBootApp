@@ -1,4 +1,4 @@
-/*package springbootstarter.repository;
+package springbootstarter.repository;
 
 import java.io.Serializable;
 
@@ -11,4 +11,3 @@ import springbootstarter.jpa.entity.Employee;
 public interface IEmployeeRepository extends CrudRepository<Employee, Serializable> {
 
 }
-*/

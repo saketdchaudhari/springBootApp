@@ -17,15 +17,15 @@ import springbootstarter.service.IJsonPlaceHolderService;
 @RestController
 @RequestMapping("/jsonPlaceHolder")
 public class JsonPlaceHolderController {
-private static final Logger logger = LogManager.getLogger(JsonPlaceHolderController.class);
-	
+	private static final Logger logger = LogManager.getLogger(JsonPlaceHolderController.class);
+
 	@Autowired
-    private IJsonPlaceHolderService service;
-	
+	private IJsonPlaceHolderService service;
+
 	@RequestMapping(value = "/posts", method = RequestMethod.GET)
-    public ResponseEntity<List<Post>> getPosts() {
-    	logger.info("Received gretting request.");
-    	List<Post> posts = service.getAllPosts();
-    	return new ResponseEntity<List<Post>>(posts, HttpStatus.OK);
-    }
+	public ResponseEntity<List<Post>> getPosts() {
+		logger.info("Received gretting request.");
+		List<Post> posts = service.getAllPosts();
+		return new ResponseEntity<List<Post>>(posts, HttpStatus.OK);
+	}
 }

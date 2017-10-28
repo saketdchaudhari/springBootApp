@@ -18,16 +18,16 @@ import springbootstarter.service.IParagraphService;
 @RestController
 @RequestMapping("/paragraph")
 public class ParagraphOperationController {
-	
+
 	private static final Logger logger = LogManager.getLogger(ParagraphOperationController.class);
-	
+
 	@Autowired
-    private IParagraphService service;
-	
+	private IParagraphService service;
+
 	@RequestMapping(value = "/wordCount", method = RequestMethod.GET)
-    public ResponseEntity<Set<WordCount>> findWordCount(@RequestParam("paragraph") String paragraph) {
-    	logger.info("Received gretting request.");
-    	Set<WordCount> wordCount = service.findWordCount(paragraph);
-    	return new ResponseEntity<Set<WordCount>>(wordCount, HttpStatus.OK);
-    }
+	public ResponseEntity<Set<WordCount>> findWordCount(@RequestParam("paragraph") String paragraph) {
+		logger.info("Received gretting request.");
+		Set<WordCount> wordCount = service.findWordCount(paragraph);
+		return new ResponseEntity<Set<WordCount>>(wordCount, HttpStatus.OK);
+	}
 }

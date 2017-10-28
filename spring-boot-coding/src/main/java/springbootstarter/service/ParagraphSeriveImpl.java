@@ -1,6 +1,7 @@
 package springbootstarter.service;
 
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +19,10 @@ public class ParagraphSeriveImpl implements IParagraphService{
 
 	@Override
 	public Set<WordCount> findWordCount(String paragraph) {
-		List<String> words = Arrays.asList(paragraph.split(" "));
+		if(paragraph == null || paragraph.trim().isEmpty()) {
+			return Collections.emptySet();
+		}
+ 		List<String> words = Arrays.asList(paragraph.split(" "));
 		Map<String, WordCount> wordCounts = new HashMap<>();
 		for (String word : words) {
 			System.out.println("word "+word);

@@ -1,4 +1,4 @@
-/*package springbootstarter.service;
+package springbootstarter.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,19 +23,18 @@ public class EmployeeServiceImpl implements IEmployeeService{
 	}
 
 	@Override
-	public Employee getEmployee(String id) {
+	public Employee getEmployee(Integer id) {
 		return repository.findOne(id);
 	}
 
 	@Override
-	public void addEmployee(Employee emp) {
-		repository.save(emp);
+	public Employee addEmployee(Employee emp) {
+		return repository.save(emp);
 	}
 
 	@Override
-	public void deleteEmployee(String id) {
+	public void deleteEmployee(Integer id) {
 		repository.delete(id);
 	}
 	
 }
-*/

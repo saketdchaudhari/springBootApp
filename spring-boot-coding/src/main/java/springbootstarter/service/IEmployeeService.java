@@ -1,4 +1,4 @@
-/*package springbootstarter.service;
+package springbootstarter.service;
 
 import java.util.List;
 
@@ -8,11 +8,10 @@ public interface IEmployeeService {
 	
 	List<Employee> getAllEmployees();
 	
-	Employee getEmployee(String id);
+	Employee getEmployee(Integer id);
 	
-	void addEmployee(Employee emp);
+	Employee addEmployee(Employee emp);
 	
-	void deleteEmployee(String id);
-	
+	void deleteEmployee(Integer id);
+
 }
-*/

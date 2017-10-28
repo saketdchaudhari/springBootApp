@@ -1,0 +1,30 @@
+###################
+# compiled source #
+###################
+*.com
+*.class
+*.settings/
+
+###############
+# Directories #
+###############
+bin/
+TestResults/
+obj/
+target/
+
+############
+# Packages #
+############
+*.jar
+
+######################
+# Logs and databases #
+######################
+*.log
+
+######################
+# STS and Eclipse #
+######################
+.project
+.classpath
