@@ -21,7 +21,7 @@ import springbootstarter.service.IThreadingService;
 @RequestMapping("/threads")
 public class ThreadingController {
 
-	private static final Logger logger = LogManager.getLogger(JsonPlaceHolderController.class);
+	private static final Logger logger = LogManager.getLogger(ExternalRestServiceCallerController.class);
 
 	@Autowired
 	private IThreadingService service;

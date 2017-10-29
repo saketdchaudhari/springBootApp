@@ -15,13 +15,14 @@ import org.springframework.web.client.RestTemplate;
 import springbootstarter.dto.Post;
 
 @Service
-public class JsonPlaceHolderService implements IJsonPlaceHolderService {
+public class ExternalRestServiceImpl implements IExternalRestService {
 
 	private final String URI = "http://jsonplaceholder.typicode.com/posts";
-
+	
+	private RestTemplate restTemplate = new RestTemplate();
+	
 	@Override
 	public List<Post> getAllPosts() {
-		RestTemplate restTemplate = new RestTemplate();
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
 		HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);

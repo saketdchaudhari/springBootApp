@@ -12,15 +12,15 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import springbootstarter.dto.Post;
-import springbootstarter.service.IJsonPlaceHolderService;
+import springbootstarter.service.IExternalRestService;
 
 @RestController
 @RequestMapping("/jsonPlaceHolder")
-public class JsonPlaceHolderController {
-	private static final Logger logger = LogManager.getLogger(JsonPlaceHolderController.class);
+public class ExternalRestServiceCallerController {
+	private static final Logger logger = LogManager.getLogger(ExternalRestServiceCallerController.class);
 
 	@Autowired
-	private IJsonPlaceHolderService service;
+	private IExternalRestService service;
 
 	@RequestMapping(value = "/posts", method = RequestMethod.GET)
 	public ResponseEntity<List<Post>> getPosts() {

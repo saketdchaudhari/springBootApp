@@ -4,6 +4,6 @@ import java.util.List;
 
 import springbootstarter.dto.Post;
 
-public interface IJsonPlaceHolderService {
+public interface IExternalRestService {
 	List<Post> getAllPosts();
 }
