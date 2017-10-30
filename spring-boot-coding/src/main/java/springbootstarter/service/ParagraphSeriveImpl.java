@@ -22,7 +22,7 @@ public class ParagraphSeriveImpl implements IParagraphService{
 		if(paragraph == null || paragraph.trim().isEmpty()) {
 			return Collections.emptySet();
 		}
- 		List<String> words = Arrays.asList(paragraph.split(" "));
+ 		List<String> words = Arrays.asList(paragraph.split("\\s+"));
 		Map<String, WordCount> wordCounts = new HashMap<>();
 		for (String word : words) {
 			System.out.println("word "+word);

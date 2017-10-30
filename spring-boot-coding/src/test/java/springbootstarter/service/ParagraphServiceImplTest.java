@@ -26,7 +26,7 @@ public class ParagraphServiceImplTest {
 
 	@Test
 	public void testGreeting_TestCase1() {
-		String paragraph = "A-word1 D-word2 C-word3 C-word3 D-word4 G-word5 1-word1 ##$$%% ##$$%%";
+		String paragraph = "A-word1 D-word2 C-word3 C-word3 D-word4     G-word5 1-word1 ##$$%% ##$$%%";
 		Set<WordCount> result = service.findWordCount(paragraph);
 		assertEquals(prepareExpectedResult(), result);
 	}
