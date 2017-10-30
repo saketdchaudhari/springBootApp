@@ -15,6 +15,12 @@ import org.springframework.web.bind.annotation.RestController;
 import springbootstarter.dto.Post;
 import springbootstarter.service.IExternalRestService;
 
+/**
+ * ExternalRestServiceCallerControlle exposes REST endpoint to perform external web 
+ * service operations.
+ * 
+ * @author saket chaudhari
+ */
 @RestController
 @RequestMapping("/jsonPlaceHolder")
 public class ExternalRestServiceCallerController {
@@ -23,10 +29,16 @@ public class ExternalRestServiceCallerController {
 	@Autowired
 	private IExternalRestService service;
 
+	/**
+	 * This method finds all {@link Post} from external REST endpoint.
+	 * 
+	 * @return {@link ResponseEntity<List<Post>>}
+	 */
 	@RequestMapping(value = "/posts", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Post>> getPosts() {
-		logger.info("Received gretting request.");
+		logger.info("Received request for ExternalRestServiceCallerController#getPosts.");
 		List<Post> posts = service.getAllPosts();
+		logger.info("Return response for ExternalRestServiceCallerController#getPosts. Result ::  %s", posts);
 		return new ResponseEntity<List<Post>>(posts, HttpStatus.OK);
 	}
 }

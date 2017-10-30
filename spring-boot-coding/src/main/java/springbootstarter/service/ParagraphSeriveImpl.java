@@ -15,36 +15,29 @@ import org.springframework.stereotype.Service;
 import springbootstarter.dto.WordCount;
 
 @Service
-public class ParagraphSeriveImpl implements IParagraphService{
+public class ParagraphSeriveImpl implements IParagraphService {
 
 	@Override
 	public Set<WordCount> findWordCount(String paragraph) {
-		if(paragraph == null || paragraph.trim().isEmpty()) {
+		if (paragraph == null || paragraph.trim().isEmpty()) {
 			return Collections.emptySet();
 		}
- 		List<String> words = Arrays.asList(paragraph.split("\\s+"));
+		List<String> words = Arrays.asList(paragraph.split("\\s+"));
 		Map<String, WordCount> wordCounts = new HashMap<>();
 		for (String word : words) {
-			System.out.println("word "+word);
-			if(wordCounts.containsKey(word)) {
+			System.out.println("word " + word);
+			if (wordCounts.containsKey(word)) {
 				WordCount wordCnt = wordCounts.get(word);
-				wordCnt.setCount(wordCnt.getCount()+1);
+				wordCnt.setCount(wordCnt.getCount() + 1);
 			} else {
 				wordCounts.put(word, new WordCount(word, 1));
 			}
 		}
-		SortedSet<WordCount> sortedWordCount = new TreeSet<>(
-			        Comparator.comparing(WordCount::getWord));
+		SortedSet<WordCount> sortedWordCount = new TreeSet<>(Comparator.comparing(WordCount::getWord));
 		for (String key : wordCounts.keySet()) {
 			sortedWordCount.add(wordCounts.get(key));
 		}
 		return sortedWordCount;
 	}
-	
-	public static void main(String[] args) {
-		ParagraphSeriveImpl a = new ParagraphSeriveImpl();
-		String s= "saket we are saket there there finding the right place the right";
-		System.out.println(a.findWordCount(s));
-	}
-    
+
 }

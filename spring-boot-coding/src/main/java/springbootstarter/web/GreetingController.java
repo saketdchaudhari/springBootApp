@@ -12,18 +12,30 @@ import org.springframework.web.bind.annotation.RestController;
 
 import springbootstarter.service.IGreetingService;
 
+/**
+ * GreetingController exposes REST endpoint to greet user.
+ * 
+ * @author saket chaudhari
+ */
 @RestController
 @RequestMapping("/greeting")
 public class GreetingController {
-	
+
 	private static final Logger logger = LogManager.getLogger(GreetingController.class);
-	
+
 	@Autowired
-    private IGreetingService service;
-	
+	private IGreetingService service;
+
+	/**
+	 * This method greets user.
+	 * 
+	 * @return {@link ResponseEntity<String>} with "Hello World!" greeting message.
+	 */
 	@RequestMapping(method = RequestMethod.GET, produces = MediaType.TEXT_PLAIN_VALUE)
-    public ResponseEntity<String> greetUser() {
-    		logger.info("Received gretting request.");
-    		return new ResponseEntity<String>(service.greetUser(), HttpStatus.OK);
-    }
+	public ResponseEntity<String> greetUser() {
+		logger.info("Received request for GreetingController#greetUser.");
+		String result = service.greetUser();
+		logger.info("Return response for GreetingController#greetUser. Result ::  %s", result);
+		return new ResponseEntity<String>(result, HttpStatus.OK);
+	}
 }

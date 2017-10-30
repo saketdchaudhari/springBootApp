@@ -11,15 +11,21 @@ import javax.persistence.Table;
 
 import org.springframework.hateoas.ResourceSupport;
 
+/**
+ * JPA entity for Employee object.
+ * 
+ * @author saket chaudhari
+ *
+ */
 @Entity
 @Table(name = "EMPLOYEE")
-public class Employee extends ResourceSupport implements Serializable{
+public class Employee extends ResourceSupport implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1113749922565940451L;
-	
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "ID")
@@ -63,4 +69,33 @@ public class Employee extends ResourceSupport implements Serializable{
 		this.salary = salary;
 	}
 
+	@Override
+	public String toString() {
+		return "Employee [empId=" + empId + ", name=" + name + ", salary=" + salary + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = super.hashCode();
+		result = prime * result + ((empId == null) ? 0 : empId.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!super.equals(obj))
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Employee other = (Employee) obj;
+		if (empId == null) {
+			if (other.empId != null)
+				return false;
+		} else if (!empId.equals(other.empId))
+			return false;
+		return true;
+	}
 }

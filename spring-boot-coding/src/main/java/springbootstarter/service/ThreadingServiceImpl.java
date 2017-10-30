@@ -22,7 +22,7 @@ public class ThreadingServiceImpl implements IThreadingService {
 
 		String firstThreadName = UUID.randomUUID().toString();
 		String secondThreadName = UUID.randomUUID().toString();
-		
+
 		Thread thread1 = new Thread(firstThreadName) {
 			@Override
 			public void run() {
@@ -82,7 +82,7 @@ public class ThreadingServiceImpl implements IThreadingService {
 					} else if (deadlockThreadInfo.getThreadName().equals(secondThreadName)) {
 						if (!deadlockThreadInfo.getLockOwnerName().equals(firstThreadName)) {
 							result = false;
-						} else{
+						} else {
 							result = true;
 						}
 					}

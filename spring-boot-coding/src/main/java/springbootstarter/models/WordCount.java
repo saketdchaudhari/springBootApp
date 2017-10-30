@@ -2,7 +2,11 @@ package springbootstarter.models;
 
 import java.util.Comparator;
 
-public class WordCount implements Comparator<String>{
+/**
+ * @author sachaudhari
+ *
+ */
+public class WordCount implements Comparator<String> {
 	String word;
 	int count;
 
@@ -15,7 +19,7 @@ public class WordCount implements Comparator<String>{
 	public void setCount(int count) {
 		this.count = count;
 	}
-	
+
 	public String getWord() {
 		return word;
 	}
@@ -34,5 +38,4 @@ public class WordCount implements Comparator<String>{
 		return o1.compareTo(o2);
 	}
 
-	
 }

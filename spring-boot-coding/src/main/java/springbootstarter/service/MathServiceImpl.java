@@ -1,16 +1,8 @@
-/**
- * 
- */
 package springbootstarter.service;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-/**
- * @author sachaudhari
- *
- */
 public class MathServiceImpl implements IMathService {
 
 	@Override

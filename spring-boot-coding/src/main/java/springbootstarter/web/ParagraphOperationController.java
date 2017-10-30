@@ -16,6 +16,11 @@ import org.springframework.web.bind.annotation.RestController;
 import springbootstarter.dto.WordCount;
 import springbootstarter.service.IParagraphService;
 
+/**
+ * ParagraphOperationController exposes REST endpoint to perform paragraph operations.
+ * 
+ * @author saket chaudhari
+ */
 @RestController
 @RequestMapping("/paragraph")
 public class ParagraphOperationController {
@@ -25,10 +30,16 @@ public class ParagraphOperationController {
 	@Autowired
 	private IParagraphService service;
 
+	/**
+	 * This method finds all unique words and their counts in given paragraph.
+	 * 
+	 * @return {@link ResponseEntity<Set<WordCount>>} Set of WordCount.
+	 */
 	@RequestMapping(value = "/wordCount", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Set<WordCount>> findWordCount(@RequestParam("paragraph") String paragraph) {
-		logger.info("Received gretting request.");
+		logger.info("Received request for ParagraphOperationController#findWordCount.");
 		Set<WordCount> wordCount = service.findWordCount(paragraph);
+		logger.info("Return response for ParagraphOperationController#findWordCount. Result ::  %s", wordCount);
 		return new ResponseEntity<Set<WordCount>>(wordCount, HttpStatus.OK);
 	}
 }
