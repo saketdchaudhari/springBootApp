@@ -40,14 +40,18 @@ public class ExternalRestServiceImplTest {
 	@InjectMocks
 	ExternalRestServiceImpl service;
 
+	@SuppressWarnings("unchecked")
 	@Test
 	public void getAllPostsTest() {
-		final ArgumentCaptor<String> captor = ArgumentCaptor.forClass(String.class);
+		final ArgumentCaptor<String> uriCaptor = ArgumentCaptor.forClass(String.class);
 		Class<HttpEntity<String>> httpEntityClass =
 	              (Class<HttpEntity<String>>)(Class)HttpEntity.class;
-		final ArgumentCaptor<HttpEntity<String>> HttpEntityCaptor = ArgumentCaptor.forClass(httpEntityClass);
+		Class<ParameterizedTypeReference<List<Post>>> parameterizedTypeRef = 
+				(Class<ParameterizedTypeReference<List<Post>>>)(Class)ParameterizedTypeReference.class;
+		
+		final ArgumentCaptor<HttpEntity<String>> httpEntityCaptor = ArgumentCaptor.forClass(httpEntityClass);
 		final ArgumentCaptor<HttpMethod> httpMethodCaptor = ArgumentCaptor.forClass(HttpMethod.class);
-		final ArgumentCaptor<ParameterizedTypeReference> ParameterizedTypeReferenceCaptor = ArgumentCaptor.forClass(ParameterizedTypeReference.class);
+		final ArgumentCaptor<ParameterizedTypeReference<List<Post>>> parameterizedTypeReferenceCaptor = ArgumentCaptor.forClass(parameterizedTypeRef);
 		
 		HttpHeaders headers = new HttpHeaders();
 		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
@@ -57,15 +61,20 @@ public class ExternalRestServiceImplTest {
                 Mockito.<HttpMethod> any(),
                 Mockito.<HttpEntity<String>> any(),
                 Mockito.<ParameterizedTypeReference<List<Post>>> any())).thenReturn(prepareResult());
+		
 		service.getAllPosts();
-		verify(restTemplate, times(1)).exchange(captor.capture(), httpMethodCaptor.capture(), 
-				HttpEntityCaptor.capture(), ParameterizedTypeReferenceCaptor.capture());
+		
+		verify(restTemplate, times(1)).exchange(uriCaptor.capture(), httpMethodCaptor.capture(), 
+				httpEntityCaptor.capture(), parameterizedTypeReferenceCaptor.capture());
 		verifyNoMoreInteractions(restTemplate);
-		String URI = captor.getValue();
+		
+		String URI = uriCaptor.getValue();
 		HttpMethod httpMethod = httpMethodCaptor.getValue();
+		
 		assertEquals(URI, "http://jsonplaceholder.typicode.com/posts");
-		assertEquals(httpMethod.GET, HttpMethod.GET);
-		assertEquals(URI, "http://jsonplaceholder.typicode.com/posts");
+		assertEquals(httpMethod.name(), HttpMethod.GET.name());
+		assertEquals(httpEntityCaptor.getValue().getHeaders().size(), 1);
+		assertEquals(httpEntityCaptor.getValue().getHeaders().get("parameters"), 1);
 		assertEquals(URI, "http://jsonplaceholder.typicode.com/posts");
 	}
 

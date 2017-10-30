@@ -12,9 +12,14 @@ import springbootstarter.repository.IEmployeeRepository;
 @Service
 public class EmployeeServiceImpl implements IEmployeeService{
 	
-	@Autowired
+	@Autowired(required=true)
 	private IEmployeeRepository repository;
 
+	@Override
+	public Employee getEmployee(Long id) {
+		return repository.findOne(id);
+	}
+	
 	@Override
 	public List<Employee> getAllEmployees() {
 		List<Employee> employees = new ArrayList<>();
@@ -23,17 +28,12 @@ public class EmployeeServiceImpl implements IEmployeeService{
 	}
 
 	@Override
-	public Employee getEmployee(Integer id) {
-		return repository.findOne(id);
-	}
-
-	@Override
 	public Employee addEmployee(Employee emp) {
 		return repository.save(emp);
 	}
 
 	@Override
-	public void deleteEmployee(Integer id) {
+	public void deleteEmployee(Long id) {
 		repository.delete(id);
 	}
 	

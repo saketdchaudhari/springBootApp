@@ -6,12 +6,12 @@ import springbootstarter.jpa.entity.Employee;
 
 public interface IEmployeeService {
 	
-	List<Employee> getAllEmployees();
+	Employee getEmployee(Long id);
 	
-	Employee getEmployee(Integer id);
+	List<Employee> getAllEmployees();
 	
 	Employee addEmployee(Employee emp);
 	
-	void deleteEmployee(Integer id);
+	void deleteEmployee(Long id);
 
 }

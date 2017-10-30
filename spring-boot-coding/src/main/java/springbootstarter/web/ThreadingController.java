@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Link;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -26,7 +27,7 @@ public class ThreadingController {
 	@Autowired
 	private IThreadingService service;
 
-	@RequestMapping(value = "/create", method = RequestMethod.POST)
+	@RequestMapping(value = "/create", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Link> createThreads() {
 	    logger.info("Received gretting request.");
 		List<String> threadNames = service.createDeadlock();
@@ -40,9 +41,9 @@ public class ThreadingController {
 		return new ResponseEntity<Link>(link, HttpStatus.CREATED);
 	}
 
-	@RequestMapping(value = "/deadlockStatus", method = RequestMethod.GET)
-	public ResponseEntity<Boolean> deadlockStatus(@RequestParam("firstThreadName") String firstThreadName,
-			@RequestParam("secondThreadName") String secondThreadName) {
+	@RequestMapping(value = "/deadlockStatus", method = RequestMethod.GET, produces = "text/plain")
+	public ResponseEntity<Boolean> deadlockStatus(@RequestParam(value = "firstThreadName", required = true) String firstThreadName,
+			@RequestParam(value = "secondThreadName", required = true) String secondThreadName) {
 		logger.info("Received gretting request.");
 		boolean result = service.detectDeadlock(firstThreadName, secondThreadName);
 		return new ResponseEntity<Boolean>(result, HttpStatus.OK);
