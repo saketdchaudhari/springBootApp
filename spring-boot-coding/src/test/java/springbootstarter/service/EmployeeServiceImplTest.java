@@ -7,6 +7,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 import static org.mockito.Mockito.when;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -31,6 +32,7 @@ public class EmployeeServiceImplTest {
 	@Mock
 	private IEmployeeRepository repository;
 	
+	// Repository returns record.
 	@Test
 	public void getEmployeeTest1() {
 		final ArgumentCaptor<Long> idCaptor = ArgumentCaptor.forClass(Long.class);
@@ -44,6 +46,7 @@ public class EmployeeServiceImplTest {
 		assertEquals(Integer.valueOf(8000), emp.getSalary());
 	}
 	
+	// Repository returns null.
 	@Test
 	public void getEmployeeTest2() {
 		final ArgumentCaptor<Long> idCaptor = ArgumentCaptor.forClass(Long.class);
@@ -54,9 +57,26 @@ public class EmployeeServiceImplTest {
 		assertEquals(null, emp);
 	}
 	
+	// Repository return records.
 	@Test
 	public void getAllEmployeesTest1() {
-		when(repository.findOne(anyInt())).thenReturn(null);
+		when(repository.findAll()).thenReturn(prepareEmployeesData());
+		List<Employee> emps = service.getAllEmployees();
+		verify(repository, times(1)).findAll();
+		verifyNoMoreInteractions(repository);
+		assertEquals(2, emps.size());
+		assertEquals(1, emps.get(0).getEmpId().longValue());
+		assertEquals(2, emps.get(1).getEmpId().longValue());
+		assertEquals("Name 1", emps.get(0).getName());
+		assertEquals("Name 2", emps.get(1).getName());
+		assertEquals(2000, emps.get(0).getSalary().intValue());
+		assertEquals(4000, emps.get(1).getSalary().intValue());
+	}
+	
+	// Repository return null.
+	@Test
+	public void getAllEmployeesTest2() {
+		when(repository.findAll()).thenReturn(null);
 		List<Employee> emps = service.getAllEmployees();
 		verify(repository, times(1)).findAll();
 		verifyNoMoreInteractions(repository);
@@ -66,10 +86,16 @@ public class EmployeeServiceImplTest {
 	@Test
 	public void deleteEmployeeTest1() {
 		final ArgumentCaptor<Long> idCaptor = ArgumentCaptor.forClass(Long.class);
-		when(repository.findOne(anyInt())).thenReturn(null);
 		service.deleteEmployee(Long.valueOf(1));
 		verify(repository, times(1)).delete(idCaptor.capture());
 		verifyNoMoreInteractions(repository);
 		assertEquals(Integer.valueOf(1), idCaptor.getValue());
+	}
+	
+	private List<Employee> prepareEmployeesData() {
+		List<Employee> emps = new ArrayList<Employee>(2);
+		emps.add(new Employee(1, "Name 1", 2000));
+		emps.add(new Employee(2, "Name 2", 4000));
+		return emps;
 	}
 }

@@ -24,6 +24,7 @@ public class ParagraphServiceImplTest {
 	@Autowired
 	private IParagraphService service;
 
+	// Paragraph is not empty
 	@Test
 	public void testGreeting_TestCase1() {
 		String paragraph = "A-word1 D-word2 C-word3 C-word3 D-word4     G-word5 1-word1 ##$$%% ##$$%%";
@@ -31,6 +32,7 @@ public class ParagraphServiceImplTest {
 		assertEquals(prepareExpectedResult(), result);
 	}
 	
+	// Paragraph is empty
 	@Test
 	public void testGreeting_TestCase2() {
 		String paragraph = "";
@@ -38,6 +40,7 @@ public class ParagraphServiceImplTest {
 		assertEquals(Collections.emptySet(), result);
 	}
 
+	// Paragraph is null
 	@Test
 	public void testGreeting_TestCase3() {
 		String paragraph = null;

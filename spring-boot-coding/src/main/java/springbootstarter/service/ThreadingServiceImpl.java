@@ -8,45 +8,53 @@ import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Service;
+
+import springbootstarter.web.ThreadingController;
 
 @Service
 public class ThreadingServiceImpl implements IThreadingService {
+
+	private static final Logger logger = LogManager.getLogger(ThreadingController.class);
 
 	private final ThreadMXBean mxBean = ManagementFactory.getThreadMXBean();
 
 	@Override
 	public List<String> createDeadlock() {
-		final Object lock1 = new Object();
-		final Object lock2 = new Object();
+		final Object resource1 = new Object();
+		final Object resource2 = new Object();
 
 		String firstThreadName = UUID.randomUUID().toString();
 		String secondThreadName = UUID.randomUUID().toString();
 
+		logger.info("Creating first thread :: %s", firstThreadName);
 		Thread thread1 = new Thread(firstThreadName) {
 			@Override
 			public void run() {
-				synchronized (lock1) {
-					System.out.println("Thread1 acquired lock1");
+				synchronized (resource1) {
+					logger.info("First thread acquired resource 1");
 					try {
 						TimeUnit.MILLISECONDS.sleep(500);
 					} catch (InterruptedException ignore) {
 					}
-					synchronized (lock2) {
-						System.out.println("Thread1 acquired lock2");
+					synchronized (resource2) {
+						logger.info("First thread acquired resource 2");
 					}
 				}
 			}
 		};
 		thread1.start();
 
+		logger.info("Creating second thread :: %s", secondThreadName);
 		Thread thread2 = new Thread(secondThreadName) {
 			@Override
 			public void run() {
-				synchronized (lock2) {
-					System.out.println("Thread2 acquired lock2");
-					synchronized (lock1) {
-						System.out.println("Thread2 acquired lock1");
+				synchronized (resource2) {
+					logger.info("Second thread acquired resource 2");
+					synchronized (resource1) {
+						logger.info("Second thread acquired resource 1");
 					}
 				}
 			}
@@ -65,21 +73,25 @@ public class ThreadingServiceImpl implements IThreadingService {
 		boolean result = false;
 		if (deadlockedThreadIds != null) {
 			ThreadInfo[] deadlockThreadInfos = ThreadingServiceImpl.this.mxBean.getThreadInfo(deadlockedThreadIds);
-			System.out.println("deadlockThreadInfo" + deadlockThreadInfos);
 			for (ThreadInfo deadlockThreadInfo : deadlockThreadInfos) {
-				System.out.println("deadlockThreadInfo" + deadlockThreadInfo.getThreadName());
 				if (deadlockThreadInfo != null) {
+					logger.info("In ThreadingServiceImpl#detectDeadlock Thread Name :: %s",
+							deadlockThreadInfo.getThreadName());
 					if (!deadlockThreadInfo.getThreadName().equals(firstThreadName)
 							&& !deadlockThreadInfo.getThreadName().equals(secondThreadName)) {
 						continue;
 					}
 					if (deadlockThreadInfo.getThreadName().equals(firstThreadName)) {
+						logger.info("In ThreadingServiceImpl#detectDeadlock Lock owner for :: %s is %s",
+								firstThreadName, deadlockThreadInfo.getLockOwnerName());
 						if (!deadlockThreadInfo.getLockOwnerName().equals(secondThreadName)) {
 							result = false;
 						} else {
 							result = true;
 						}
 					} else if (deadlockThreadInfo.getThreadName().equals(secondThreadName)) {
+						logger.info("In ThreadingServiceImpl#detectDeadlock Lock owner for :: %s is %s",
+								secondThreadName, deadlockThreadInfo.getLockOwnerName());
 						if (!deadlockThreadInfo.getLockOwnerName().equals(firstThreadName)) {
 							result = false;
 						} else {

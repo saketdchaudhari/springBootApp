@@ -19,12 +19,14 @@ public class ThreadingServiceImplTest {
 	@Autowired
 	private IThreadingService service;
 
+	// Detect deadlock when no threads created.
 	@Test
 	public void detectDeadlock_TestCase1() {
 		boolean result = service.detectDeadlock("thread1", "thread2");
 		assertEquals(result, false);
 	}
 
+	//Detect deadlock positive scenario
 	@Test
 	public void detectDeadlock_TestCase2() throws InterruptedException {
 		List<String> result = service.createDeadlock();
@@ -34,6 +36,7 @@ public class ThreadingServiceImplTest {
 		assertEquals(deadlockResult, true);
 	}
 	
+	//Detect deadlock when second thread name is invalid.
 	@Test
 	public void detectDeadlock_TestCase3() throws InterruptedException {
 		List<String> result = service.createDeadlock();
@@ -43,6 +46,7 @@ public class ThreadingServiceImplTest {
 		assertEquals(deadlockResult, false);
 	}
 	
+	//Detect deadlock when dirst thread name is invalid.
 	@Test
 	public void detectDeadlock_TestCase4() throws InterruptedException {
 		List<String> result = service.createDeadlock();
@@ -52,6 +56,7 @@ public class ThreadingServiceImplTest {
 		assertEquals(deadlockResult, false);
 	}
 	
+	//Detect deadlock when first thread is null.
 	@Test
 	public void detectDeadlock_TestCase5() throws InterruptedException {
 		List<String> result = service.createDeadlock();
@@ -61,6 +66,7 @@ public class ThreadingServiceImplTest {
 		assertEquals(deadlockResult, false);
 	}
 	
+	//Detect deadlock when second thread is null.
 	@Test
 	public void detectDeadlock_TestCase6() throws InterruptedException {
 		List<String> result = service.createDeadlock();
