@@ -14,10 +14,11 @@ Read this file to understand how to setup the application on local and execute c
  
 # Curl command to call 
 
-  1.  Greeting endpoint
+  1.  Greeting endpoint:
+  
         curl http://localhost:9090/api/rest/greeting
 
-  2. external REST webservice endpoint
+  2. external REST webservice endpoint:
 
         curl -H "Accept:application/json" http://localhost:9090/api/rest/jsonPlaceHolder/posts
 
