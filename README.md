@@ -32,9 +32,9 @@ Read this file to understand how to setup the application on local and execute c
 
   5. check thread deadlock status endpoint:
 
-        curl --verbose -X GET url
+        curl --verbose -G http://localhost:9090/api/rest/threads/deadlockStatus --data-urlencode {firstThreadName} --data-urlencode {secondThreadName}
 
-        **Note: Please use url from the location response header of above endpoint(/threads/create) .
+        **Note: Please use firstThreadName and secondThreadName from the location response header of above endpoint(/threads/create) .
 
   6.  create employee record endpoint:
 
