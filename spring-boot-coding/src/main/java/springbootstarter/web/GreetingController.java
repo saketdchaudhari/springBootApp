@@ -35,7 +35,7 @@ public class GreetingController {
 	public ResponseEntity<String> greetUser() {
 		logger.info("Received request for GreetingController#greetUser.");
 		String result = service.greetUser();
-		logger.info("Return response for GreetingController#greetUser. Result ::  %s", result);
+		logger.info("Return response for GreetingController#greetUser. Result ::  {}", result);
 		return new ResponseEntity<String>(result, HttpStatus.OK);
 	}
 }

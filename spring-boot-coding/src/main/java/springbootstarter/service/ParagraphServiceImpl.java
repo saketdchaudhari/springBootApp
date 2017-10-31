@@ -15,7 +15,7 @@ import org.springframework.stereotype.Service;
 import springbootstarter.dto.WordCount;
 
 @Service
-public class ParagraphSeriveImpl implements IParagraphService {
+public class ParagraphServiceImpl implements IParagraphService {
 
 	@Override
 	public Set<WordCount> findWordCount(String paragraph) {

@@ -40,8 +40,8 @@ public class EmployeeServiceImplTest {
 		Employee emp = service.getEmployee(Long.valueOf(1));
 		verify(repository, times(1)).findOne(idCaptor.capture());
 		verifyNoMoreInteractions(repository);
-		assertEquals(Integer.valueOf(1), idCaptor.getValue());
-		assertEquals(Integer.valueOf(1), emp.getEmpId());
+		assertEquals(1, idCaptor.getValue().longValue());
+		assertEquals(1, emp.getEmpId().longValue());
 		assertEquals("Test Name", emp.getName());
 		assertEquals(Integer.valueOf(8000), emp.getSalary());
 	}
@@ -73,23 +73,13 @@ public class EmployeeServiceImplTest {
 		assertEquals(4000, emps.get(1).getSalary().intValue());
 	}
 	
-	// Repository return null.
-	@Test
-	public void getAllEmployeesTest2() {
-		when(repository.findAll()).thenReturn(null);
-		List<Employee> emps = service.getAllEmployees();
-		verify(repository, times(1)).findAll();
-		verifyNoMoreInteractions(repository);
-		assertEquals(null, emps);
-	}
-
 	@Test
 	public void deleteEmployeeTest1() {
 		final ArgumentCaptor<Long> idCaptor = ArgumentCaptor.forClass(Long.class);
 		service.deleteEmployee(Long.valueOf(1));
 		verify(repository, times(1)).delete(idCaptor.capture());
 		verifyNoMoreInteractions(repository);
-		assertEquals(Integer.valueOf(1), idCaptor.getValue());
+		assertEquals(1, idCaptor.getValue().longValue());
 	}
 	
 	private List<Employee> prepareEmployeesData() {

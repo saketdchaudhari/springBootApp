@@ -53,29 +53,32 @@ public class ExternalRestServiceImplTest {
 		final ArgumentCaptor<HttpMethod> httpMethodCaptor = ArgumentCaptor.forClass(HttpMethod.class);
 		final ArgumentCaptor<ParameterizedTypeReference<List<Post>>> parameterizedTypeReferenceCaptor = ArgumentCaptor.forClass(parameterizedTypeRef);
 		
-		HttpHeaders headers = new HttpHeaders();
-		headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
-		HttpEntity<String> entity = new HttpEntity<String>("parameters", headers);
+		HttpHeaders expectedHeaders = new HttpHeaders();
+		expectedHeaders.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
+		HttpEntity<String> expectedEntity = new HttpEntity<String>("parameters", expectedHeaders);
 		
 		when(restTemplate.exchange(Mockito.anyString(),
                 Mockito.<HttpMethod> any(),
                 Mockito.<HttpEntity<String>> any(),
                 Mockito.<ParameterizedTypeReference<List<Post>>> any())).thenReturn(prepareResult());
 		
-		service.getAllPosts();
+		List<Post> result = service.getAllPosts();
 		
 		verify(restTemplate, times(1)).exchange(uriCaptor.capture(), httpMethodCaptor.capture(), 
 				httpEntityCaptor.capture(), parameterizedTypeReferenceCaptor.capture());
 		verifyNoMoreInteractions(restTemplate);
 		
-		String URI = uriCaptor.getValue();
-		HttpMethod httpMethod = httpMethodCaptor.getValue();
+		assertEquals("http://jsonplaceholder.typicode.com/posts", uriCaptor.getValue());
+		assertEquals(HttpMethod.GET.name(), httpMethodCaptor.getValue().name());
+		assertEquals(expectedEntity, httpEntityCaptor.getValue());
 		
-		assertEquals(URI, "http://jsonplaceholder.typicode.com/posts");
-		assertEquals(httpMethod.name(), HttpMethod.GET.name());
-		assertEquals(httpEntityCaptor.getValue().getHeaders().size(), 1);
-		assertEquals(httpEntityCaptor.getValue().getHeaders().get("parameters"), 1);
-		assertEquals(URI, "http://jsonplaceholder.typicode.com/posts");
+		assertEquals(2, result.size());
+		assertEquals(1, result.get(0).getId());
+		assertEquals("First post title", result.get(0).getTitle());
+		assertEquals("First post body", result.get(0).getBody());
+		assertEquals(2, result.get(1).getId());
+		assertEquals("Second post title", result.get(1).getTitle());
+		assertEquals("Second post body", result.get(1).getBody());
 	}
 
 	private ResponseEntity<List<Post>> prepareResult() {

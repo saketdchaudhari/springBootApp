@@ -47,7 +47,7 @@ public class ThreadingController {
 				.queryParam("firstThreadName", threadNames.get(0)).queryParam("secondThreadName", threadNames.get(1))
 				.build().toUri();
 		Link link = new Link(location.toString(), "deadlockStatus");
-		logger.info("Return response for ThreadingController#createThreads. Result :: %s", link);
+		logger.info("Return response for ThreadingController#createThreads. Result :: {}", link);
 		return new ResponseEntity<Link>(link, HttpStatus.CREATED);
 	}
 
@@ -67,10 +67,10 @@ public class ThreadingController {
 			@RequestParam(value = "firstThreadName", required = true) String firstThreadName,
 			@RequestParam(value = "secondThreadName", required = true) String secondThreadName) {
 		logger.info(
-				"Received request for ThreadingController#deadlockStatus. firstThreadName :: %s secondThreadName :: %s",
+				"Received request for ThreadingController#deadlockStatus. firstThreadName :: {} secondThreadName :: {}",
 				firstThreadName, secondThreadName);
 		boolean result = service.detectDeadlock(firstThreadName, secondThreadName);
-		logger.info("Return response for ThreadingController#deadlockStatus. Result :: %s", result);
+		logger.info("Return response for ThreadingController#deadlockStatus. Result :: {}", result);
 		return new ResponseEntity<Boolean>(result, HttpStatus.OK);
 	}
 }

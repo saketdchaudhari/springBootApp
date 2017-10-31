@@ -42,13 +42,13 @@ public class EmployeeController {
 	 */
 	@RequestMapping(value = "{id}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Employee> findEmployee(@PathVariable(value = "id", required = true) long employeeId) {
-		logger.info("Received request for EmployeeController#findEmployee. EmpId ::  %s", employeeId);
+		logger.info("Received request for EmployeeController#findEmployee. EmpId ::  {}", employeeId);
 		Employee employee = service.getEmployee(employeeId);
 		if (employee != null) {
-			logger.info("Return response for EmployeeController#findEmployee. Result ::  %s", employee);
+			logger.info("Return response for EmployeeController#findEmployee. Result ::  {}", employee);
 			return new ResponseEntity<Employee>(employee, HttpStatus.OK);
 		} else {
-			logger.info("Return response for EmployeeController#findEmployee. Result ::  %s", employee);
+			logger.info("Return response for EmployeeController#findEmployee. Result ::  {}", employee);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 	}
@@ -63,7 +63,7 @@ public class EmployeeController {
 		logger.info("Received request for EmployeeController#findAllEmployees");
 		List<Employee> employees = service.getAllEmployees();
 		if (employees == null || employees.isEmpty()) {
-			logger.info("Return response for EmployeeController#findAllEmployees. Result ::  %s", employees);
+			logger.info("Return response for EmployeeController#findAllEmployees. Result ::  {}", employees);
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 		}
 		for (Employee employee : employees) {
@@ -72,7 +72,7 @@ public class EmployeeController {
 					.withRel("employee");
 			employee.add(employeeLink);
 		}
-		logger.info("Return response for EmployeeController#findAllEmployees. Result ::  %s", employees);
+		logger.info("Return response for EmployeeController#findAllEmployees. Result ::  {}", employees);
 		return ResponseEntity.ok(employees);
 	}
 

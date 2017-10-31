@@ -24,7 +24,7 @@ public class EmployeeRepositoryTest {
 	/**
 	 * 
 	 */
-	@Test
+	//@Test
 	@Transactional
 	@Rollback(true)
 	public void createEmployeeTest() {
@@ -35,7 +35,7 @@ public class EmployeeRepositoryTest {
 		assertEquals(emp.getSalary(), persistedEmp.getSalary());
 	}
 	
-	@Test
+	//@Test
 	@Transactional
 	@Rollback(true)
 	public void createEmployeeTest1() {

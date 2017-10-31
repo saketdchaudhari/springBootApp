@@ -29,7 +29,7 @@ public class ThreadingServiceImpl implements IThreadingService {
 		String firstThreadName = UUID.randomUUID().toString();
 		String secondThreadName = UUID.randomUUID().toString();
 
-		logger.info("Creating first thread :: %s", firstThreadName);
+		logger.info("Creating first thread :: {}", firstThreadName);
 		Thread thread1 = new Thread(firstThreadName) {
 			@Override
 			public void run() {
@@ -47,7 +47,7 @@ public class ThreadingServiceImpl implements IThreadingService {
 		};
 		thread1.start();
 
-		logger.info("Creating second thread :: %s", secondThreadName);
+		logger.info("Creating second thread :: {}", secondThreadName);
 		Thread thread2 = new Thread(secondThreadName) {
 			@Override
 			public void run() {
@@ -75,14 +75,14 @@ public class ThreadingServiceImpl implements IThreadingService {
 			ThreadInfo[] deadlockThreadInfos = ThreadingServiceImpl.this.mxBean.getThreadInfo(deadlockedThreadIds);
 			for (ThreadInfo deadlockThreadInfo : deadlockThreadInfos) {
 				if (deadlockThreadInfo != null) {
-					logger.info("In ThreadingServiceImpl#detectDeadlock Thread Name :: %s",
+					logger.info("In ThreadingServiceImpl#detectDeadlock Thread Name :: {}",
 							deadlockThreadInfo.getThreadName());
 					if (!deadlockThreadInfo.getThreadName().equals(firstThreadName)
 							&& !deadlockThreadInfo.getThreadName().equals(secondThreadName)) {
 						continue;
 					}
 					if (deadlockThreadInfo.getThreadName().equals(firstThreadName)) {
-						logger.info("In ThreadingServiceImpl#detectDeadlock Lock owner for :: %s is %s",
+						logger.info("In ThreadingServiceImpl#detectDeadlock Lock owner for :: {} is {}",
 								firstThreadName, deadlockThreadInfo.getLockOwnerName());
 						if (!deadlockThreadInfo.getLockOwnerName().equals(secondThreadName)) {
 							result = false;
@@ -90,7 +90,7 @@ public class ThreadingServiceImpl implements IThreadingService {
 							result = true;
 						}
 					} else if (deadlockThreadInfo.getThreadName().equals(secondThreadName)) {
-						logger.info("In ThreadingServiceImpl#detectDeadlock Lock owner for :: %s is %s",
+						logger.info("In ThreadingServiceImpl#detectDeadlock Lock owner for :: {} is {}",
 								secondThreadName, deadlockThreadInfo.getLockOwnerName());
 						if (!deadlockThreadInfo.getLockOwnerName().equals(firstThreadName)) {
 							result = false;

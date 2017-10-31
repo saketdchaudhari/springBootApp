@@ -10,7 +10,7 @@ import java.util.TreeSet;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.InjectMocks;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -21,8 +21,8 @@ import springbootstarter.dto.WordCount;
 @ContextConfiguration(classes = SpringBootCodingApplication.class)
 public class ParagraphServiceImplTest {
 
-	@Autowired
-	private IParagraphService service;
+	@InjectMocks
+	private ParagraphServiceImpl service;
 
 	// Paragraph is not empty
 	@Test

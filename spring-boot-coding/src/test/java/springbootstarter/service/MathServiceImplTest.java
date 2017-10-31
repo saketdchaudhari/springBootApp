@@ -6,7 +6,7 @@ import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.mockito.InjectMocks;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -16,8 +16,8 @@ import springbootstarter.SpringBootCodingApplication;
 @ContextConfiguration(classes = SpringBootCodingApplication.class)
 public class MathServiceImplTest {
 
-	@Autowired
-	private IMathService service;
+	@InjectMocks
+	private MathServiceImpl service;
 
 	@Test
 	public void testGreetingTestCase1() {

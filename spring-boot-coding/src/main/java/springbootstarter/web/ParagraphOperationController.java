@@ -39,7 +39,7 @@ public class ParagraphOperationController {
 	public ResponseEntity<Set<WordCount>> findWordCount(@RequestParam("paragraph") String paragraph) {
 		logger.info("Received request for ParagraphOperationController#findWordCount.");
 		Set<WordCount> wordCount = service.findWordCount(paragraph);
-		logger.info("Return response for ParagraphOperationController#findWordCount. Result ::  %s", wordCount);
+		logger.info("Return response for ParagraphOperationController#findWordCount. Result ::  {}", wordCount);
 		return new ResponseEntity<Set<WordCount>>(wordCount, HttpStatus.OK);
 	}
 }

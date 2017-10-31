@@ -38,7 +38,7 @@ public class ExternalRestServiceCallerController {
 	public ResponseEntity<List<Post>> getPosts() {
 		logger.info("Received request for ExternalRestServiceCallerController#getPosts.");
 		List<Post> posts = service.getAllPosts();
-		logger.info("Return response for ExternalRestServiceCallerController#getPosts. Result ::  %s", posts);
+		logger.info("Return response for ExternalRestServiceCallerController#getPosts. Result ::  {}", posts);
 		return new ResponseEntity<List<Post>>(posts, HttpStatus.OK);
 	}
 }
