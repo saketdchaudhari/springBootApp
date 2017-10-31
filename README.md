@@ -25,7 +25,7 @@ Note: Please use url from the location response header of above (/threads/create
 
 # Endpoint to create employee record
 
-curl -H "Accept: application/json" -d '{"name":"Name 1", "salary":2000}' -X POST http://localhost:9090/api/rest/employees
+curl -H "Content-Type: application/json"  "Accept: application/json" -d '{"name":"Name 1", "salary":2000}' -X POST http://localhost:9090/api/rest/employees
 
 # Endpoint to find employee record
 
