@@ -11,7 +11,7 @@ curl -H "Accept:application/json" http://localhost:9090/api/rest/jsonPlaceHolder
 
 # Endpoint to find word count
 
-curl -H "Accept: application/json" -X GET -d "paragraph=A-word1 D-word2 C-word3 C-word3 D-word4     G-word5 1-word1 ##$$%% ##$$%%" http://localhost:9090/api/rest/paragraph/wordCount
+curl -H "Accept: application/json" -G -X GET http://localhost:9090/api/rest/paragraph/wordCount --data-urlencode "paragraph=A-word1 D-word2 C-word3 C-word3 D-word4     G-word5 1-word1 ##$$%% ##$$%%"
 
 # Endpoint to create thread
 
