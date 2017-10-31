@@ -16,38 +16,38 @@ Read this file to understand how to setup the application on local and execute c
 
   1.  Greeting endpoint:
   
-        curl http://localhost:9090/api/rest/greeting
+        curl -I http://localhost:9090/api/rest/greeting
 
   2. external REST webservice endpoint:
 
-        curl -H "Accept:application/json" http://localhost:9090/api/rest/jsonPlaceHolder/posts
+        curl -I -H "Accept:application/json" http://localhost:9090/api/rest/jsonPlaceHolder/posts
 
   3. find word count endpoint: 
 
-        curl -H "Accept: application/json" -G -X GET http://localhost:9090/api/rest/paragraph/wordCount --data-urlencode "paragraph=A-   word1 D-word2 C-word3 C-word3 D-word4     G-word5 1-word1 ##$$%% ##$$%%"
+        curl -I -H "Accept: application/json" -G -X GET http://localhost:9090/api/rest/paragraph/wordCount --data-urlencode "paragraph=A-   word1 D-word2 C-word3 C-word3 D-word4     G-word5 1-word1 ##$$%% ##$$%%"
 
   4. create thread endpoint:
 
-        curl -H "Accept: application/json" -X POST http://localhost:9090/api/rest/threads/create
+        curl -I -H "Accept: application/json" -X POST http://localhost:9090/api/rest/threads/create
 
   5. check thread deadlock status endpoint:
 
-        curl -X GET url
+        curl -I -X GET url
 
         **Note: Please use url from the location response header of above endpoint(/threads/create) .
 
   6.  create employee record endpoint:
 
-        curl -H "Content-Type: application/json"  "Accept: application/json" -d '{"name":"Name 1", "salary":2000}' -X POST http://localhost:9090/api/rest/employees
+        curl -I -H "Content-Type: application/json"  "Accept: application/json" -d '{"name":"Name 1", "salary":2000}' -X POST http://localhost:9090/api/rest/employees
 
   7.  find employee record endpoint:
 
-        curl -H "Accept: application/json" -X GET http://localhost:9090/api/rest/employees/{id}
+        curl -I -H "Accept: application/json" -X GET http://localhost:9090/api/rest/employees/{id}
 
   8.  find all employee record endpoint:
 
-        curl -H "Accept: application/json" -X GET http://localhost:9090/api/rest/employees
+        curl -I -H "Accept: application/json" -X GET http://localhost:9090/api/rest/employees
 
   9.  delete employee record endpoint
 
-        curl -X DELETE http://localhost:9090/api/rest/employees/{id}
+        curl -I -X DELETE http://localhost:9090/api/rest/employees/{id}
