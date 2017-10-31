@@ -1,6 +1,6 @@
 # springBootApp
 Spring boot application.
-Read this file to understand how to setup the application on local and call the endpoints.
+Read this file to understand how to setup the application on local and execute curl command to call the endpoints.
 
 # Steps to setup the application and run maven build.
 
