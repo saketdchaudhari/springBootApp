@@ -5,11 +5,9 @@ Read this file to understand how to setup the application on local and execute c
 # Steps to setup the application and run maven build.
 
   1. Import the code on local drive.
-  2. Open cmd prompt on local and cd to the path to the directory where code is imported.
-  3. run the following command to build the application and run the tests.
-          mvn clean install
-  4. Once the build finishes successfully run the below command to start the application
-          java -jar ***************************
+  2. Open cmd prompt on local and cd to the path of directory where code is imported.
+  3. Run the command **mvn clean install** to build the application and run the tests.
+  4. Once the build finishes successfully run the command **java -jar *************************** to start the application          
   5. Once the server starts successfully the application should be up and running on port 9090 (default configured port in               application.properties)
 
 # ########## Below are curl commands to call different endpoints ###########
