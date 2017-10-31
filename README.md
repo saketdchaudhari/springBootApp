@@ -2,7 +2,7 @@
 Spring boot application.
 Read this file to understand how to setup the application on local and execute curl command to call the endpoints.
 
-# Steps to setup the application and run maven build.
+# A. Steps to setup the application and run maven build.
 
   1. Import the code on local drive.
   2. Open cmd prompt on local and cd to the path of directory where code is imported.
@@ -10,15 +10,16 @@ Read this file to understand how to setup the application on local and execute c
   4. Once the build finishes successfully run the command **java -jar *************************** to start the application          
   5. Once the server starts successfully the application should be up and running on port 9090 (default configured port in               application.properties)
 
-# ########## Below are curl commands to call different endpoints ###########
+# B. Below are curl commands to call different endpoints
  
-# Curl command for Greeting endpoint
+# Curl command to call 
 
-curl http://localhost:9090/api/rest/greeting
+  1.  Greeting endpoint
+        curl http://localhost:9090/api/rest/greeting
 
-# Curl command to call external REST webservice endpoint
+  2. external REST webservice endpoint
 
-curl -H "Accept:application/json" http://localhost:9090/api/rest/jsonPlaceHolder/posts
+        curl -H "Accept:application/json" http://localhost:9090/api/rest/jsonPlaceHolder/posts
 
 # Curl command to call find word count endpoint 
 
